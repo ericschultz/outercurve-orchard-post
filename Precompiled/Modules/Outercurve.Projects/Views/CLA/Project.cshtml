@@ -1,0 +1,39 @@
+﻿@model Outercurve.Projects.ViewModels.CLAProjectViewModel
+
+@{
+    Layout.Title = Model.Name;
+}
+<div class="page-header">
+    <h2>Contributors to @Model.Name</h2>
+</div>
+<p>To contribute significant code to @Model.Name, you must sign a CLA. To get started, email 
+    @Html.Link("contributions@outercurve.org", String.Format("mailto:contributions@outercurve.org?subject=New%20Contributor%20to%20{0}", Model.Name))</p>
+<table class="table">
+        <thead>
+            <tr>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Is Valid</th>
+        
+             </tr>
+        </thead>
+        @foreach (var i in Model.Items) {
+            var klass = i.IsValid ? "success" : "error";
+        
+            <tr class="@(klass)">
+                <td>
+                    @i.LastName
+                </td>
+                <td>
+                    @i.FirstName
+                </td>
+                <td>
+                    @if (i.IsValid) {
+                        <i class="icon-ok" />
+                    }
+                </td>
+               
+            </tr>
+        }
+    </table>
+

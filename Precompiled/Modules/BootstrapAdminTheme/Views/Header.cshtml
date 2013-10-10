@@ -1,0 +1,18 @@
+﻿@using Orchard.UI.Resources
+@using BootstrapAdminTheme
+@model dynamic
+
+@using(Script.Foot())
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('a[rel=tooltip]').tooltip();
+        });
+    </script>
+}
+<div id="branding">
+	<a href='@Url.Action("Index", new { Area = "", Controller = "Home" })' title='@T("Your Site")' class='logo-link'>
+		<h1>@T("Your Site")</h1>
+    <small>@T("Admin Panel")</small>
+	</a>
+</div>

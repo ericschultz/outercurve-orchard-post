@@ -1,0 +1,69 @@
+﻿@using Orchard.ContentManagement
+@using Outercurve.Projects.Models
+@model Outercurve.Projects.ViewModels.CLAAdminIndexViewModel
+
+@{
+
+    Layout.Title = T("Agreements").ToString();
+}
+
+@using (Html.BeginFormAntiForgeryPost()) {
+    @Html.ValidationSummary()
+    <div class="manage">@Html.ActionLink(T("Download CSV of agreements").ToString(), "GetExcelOfCLAs", new {}, new {@class = "button primaryAction"})@Html.ActionLink(T("Add a new agreement").ToString(), "Create", new {}, new {@class = "button primaryAction"})</div>
+
+    <fieldset>
+        <table class="items">
+            <thead>
+                <tr>
+                    <th scope="col">&nbsp;&darr;</th>
+                    <th scope="col">@T("Date")</th>
+                    <th scope="col">@T("Agreement Signer")</th>
+                    <th scope="col">@T("Project")</th>
+                    <th scope="col">@T("Foundation Signer")</th>
+                    <th scope="col">@T("Employer")</th>
+                    <th scope="col">@T("Active")</th>
+                    <th scope="col">@T("Actions")</th>
+                </tr>
+            </thead>
+            @foreach (var entry in Model.CLAs) {
+                var claPart = entry.CLAItem.As<CLAPart>();
+                 
+                <tr>
+                    <td>
+                       
+                    </td>
+                    <td>
+                        @entry.SignedDate
+                    </td>
+                    <td>
+                        @entry.CLASignerName
+                    </td>
+                    <td>
+                        @entry.ProjectTitle
+                    </td>
+                    <td>
+                        @entry.FoundationSignerName
+                    </td>
+                    <td>
+                        @entry.Employer
+                    </td>
+                    <td>
+                        @if (entry.IsActive) {
+                            <i class="icon-ok" />
+                        }
+                       
+                   </td>
+                    <td>
+                        @Html.ItemDisplayLink(T("View").Text, entry.CLAItem)
+                        @T(" | ")
+                        @Html.ActionLink(T("Edit").ToString(), "Edit", new { claPart.Id })
+                         @T(" | ")
+                        @Html.ActionLink(T("Delete").ToString(), "Delete", new { claPart.Id}, new { itemprop = "RemoveUrl UnsafeUrl" })
+                    </td>
+                </tr>
+            
+            }
+        </table>
+        @Display(Model.Pager)
+    </fieldset>
+}

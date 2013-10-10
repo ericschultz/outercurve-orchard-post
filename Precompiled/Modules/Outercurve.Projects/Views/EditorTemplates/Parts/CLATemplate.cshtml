@@ -1,0 +1,27 @@
+﻿@using Outercurve.Projects.Helpers
+@model Outercurve.Projects.ViewModels.Parts.EditCLATemplateViewModel
+           
+
+<div class="form-horizontal container-fluid">
+    
+    
+    <div class="control-group">
+                @Html.ControlLabelFor(m => m.Title, T("Description"))
+                <div class="controls">
+                    @Html.ControlTextBoxFor(m => m.Title)
+                    @Html.ControlValidationMessageFor(m => m.Title, null)
+                </div>
+            </div>
+
+  
+    
+      <div class="control-group">
+                @Html.ControlLabelFor(m => m.CLA, T("Agreement text"))
+                <div class="controls">
+                    @Html.ControlTextAreaFor(m => m.CLA, new {rows = 8})
+                    @Html.ControlValidationMessageFor(m => m.CLA, null)
+                </div>
+       </div>
+
+   
+</div>
